@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | ShopInfinity</title>
+  <style>
+    body {
+      background-color: #fdf6e3;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-box {
+      background-color: #e6d8c3;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 400px;
+    }
+    .form-box h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+    .form-box form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .form-box input {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .form-box button {
+      padding: 12px;
+      background-color: #b8860b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .form-box button:hover {
+      background-color: #a0750a;
+    }
+    .form-box p {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+    .form-box a {
+      color: #b8860b;
+      text-decoration: none;
+    }
+    .form-box a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h2>Create Your Account</h2>
+    <form id="signupForm">
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <input type="password" id="confirm_password" placeholder="Confirm Password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="login.html">Login here</a></p>
+  </div>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirm_password").value;
+
+      if(password !== confirmPassword){
+        alert("Passwords do not match!");
+        return;
+      }
+
+      // user object বানাই
+      const userData = {
+        username: username,
+        email: email,
+        password: password
+      };
+
+      // localStorage এ save (username কে key বানিয়ে)
+      localStorage.setItem("user_" + username, JSON.stringify(userData));
+
+      alert("Account created successfully!");
+      window.location.href = "login.html"; // signup শেষে login page এ যাবে
+    });
+  </script>
+</body>
+</html>

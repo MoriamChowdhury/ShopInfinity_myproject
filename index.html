@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopInfinity</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    section {
+      scroll-margin-top: 100px;
+    }
+    nav ul li a.active {
+      background-color: #fff8e1;
+      color: #b8860b;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header>
+    <nav id="navigation">
+      <div class="Logo">
+        <h2>ShopInfinity</h2>
+      </div>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li class="dropdown">
+  <a href="#">Admin ▼</a>
+  <ul class="dropdownMenu">
+    <li><a href="admin-login.html">Login</a></li>
+    <li><a href="admin-signup.html">Sign Up</a></li>
+  </ul>
+</li>
+       
+      </ul>
+      <div class="login-btn-container">
+        <a href="login.html" class="login-link">Login</a>
+      </div>
+    </nav>
+
+    <!-- Hero Area -->
+    <div id="main-header">
+      <div class="header-container">
+        <!-- Optional hero content -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Promo Section -->
+    <section class="promo-section" id="home">
+      <div class="promo-container">
+       <div class="promo-video">
+  <video autoplay muted loop playsinline>
+    <source src="video/promo.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <div class="promo-text">Best for Shopping</div>
+</div>
+        <div class="promo-info">
+          <h2>Why Choose Us</h2>
+          <p>We’re not just a store—we’re your shopping partner. Enjoy fast delivery, easy returns, and exclusive deals every time you shop with us.</p>
+          <p>From fashion to tech, we offer quality products, secure payments, and customer support that truly cares.</p>
+          <a href="#" class="learn-btn">Learn More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service Highlights -->
+    <section id="services">
+      <h2 style="text-align:center; margin: 40px 0;">Services</h2>
+      <div class="service-row">
+        <div class="service-box">
+          <img src="icons/shipping.png" alt="Free Shipping" />
+          <h3>Free Shipping</h3>
+          <p>On All Orders</p>
+        </div>
+        <div class="service-box">
+          <img src="icons/return.png" alt="Returns" />
+          <h3>10 Days Returns</h3>
+          <p>Moneyback Guarantee</p>
+        </div>
+        <div class="service-box">
+          <img src="icons/gift.png" alt="Gift" />
+          <h3>Offer & Gift</h3>
+          <p>On All Orders</p>
+        </div>
+        <div class="service-box">
+          <img src="icons/secure.png" alt="Secure Payment" />
+          <h3>Secure Payment</h3>
+          <p>Protected By Paypal</p>
+        </div>
+      </div>
+    </section>
+
+<!-- Featured Products -->
+<section id="categories">
+  <h2 style="text-align:center; margin: 40px 0;">Categories</h2>
+  
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="image/product1.jpg" alt="Product 1" />
+      <h3>Dresses</h3>
+      <!-- Shop Now button linked -->
+      <a href="dresses.html"><button>Shop Now</button></a>
+    </div>
+
+    <div class="product-card">
+      <img src="image/product2.jpg" alt="Product 2" />
+      <h3>Accessories</h3>
+      <a href="accessories.html"><button>Shop Now</button></a>
+    </div>
+
+    <div class="product-card">
+      <img src="image/product5.jpg" alt="Product 3" />
+      <h3>Shoes</h3>
+      <a href="shoes.html"><button>Shop Now</button></a>
+    </div>
+
+    <div class="product-card">
+      <img src="image/product4.jpg" alt="Product 4" />
+      <h3>Bags</h3>
+      <a href="bags.html"><button>Shop Now</button></a>
+    </div>
+  </div>
+</section>
+
+
+    <!-- New Arrivals Section -->
+<section id="new-arrivals">
+  <h2 style="text-align:center; margin: 40px 0;">New Arrivals</h2>
+
+  <div class="new-arrivals-grid">
+    <!-- First 10 visible cards -->
+    <div class="product-card" data-index="1"><img src="image/new1.jpg" alt="New Arrival 1" /><h3>Elegant Kurti</h3><p class="price">৳ 3250</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card" data-index="2"><img src="image/new2.jpg" alt="New Arrival 2" /><h3>Kurti</h3><p class="price">৳ 3500</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card" data-index="3"><img src="image/new3.jpg" alt="New Arrival 3" /><h3>Kaftan</h3><p class="price">৳ 3000</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card" data-index="4"><img src="image/new4.jpg" alt="New Arrival 4" /><h3>Floral Gown </h3><p class="price">৳ 2550</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card" data-index="5"><img src="image/new5.jpg" alt="New Arrival 5" /><h3>western</h3><p class="price">৳ 4000</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card" data-index="6"><img src="image/new6.jpg" alt="New Arrival 6" /><h3>Casual Tunic</h3><p class="price">৳ 1,100</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card" data-index="7"><img src="image/new7.jpg" alt="New Arrival 7" /><h3>Boho Dress</h3><p class="price">৳ 1,750</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card" data-index="8"><img src="image/new8.jpg" alt="New Arrival 8" /><h3>Formal Blazer</h3><p class="price">৳ 2,800</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card" data-index="9"><img src="image/new9.jpg" alt="New Arrival 9" /><h3>Traditional Panjabi</h3><p class="price">৳ 1,600</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card" data-index="10"><img src="image/new10.jpg" alt="New Arrival 10" /><h3>Chic Skirt</h3><p class="price">৳ 950</p><button class="add-to-cart">Add to Cart</button></div>
+
+    <!-- Hidden cards -->
+    <div class="product-card hidden" data-index="11"><img src="image/new11.jpg" alt="New Arrival 11" /><h3>Floral Top</h3><p class="price">৳ 850</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card hidden" data-index="12"><img src="image/new12.jpg" alt="New Arrival 12" /><h3>Ethnic Kurta</h3><p class="price">৳ 1,300</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card hidden" data-index="13"><img src="image/new13.jpg" alt="New Arrival 13" /><h3>Party Gown</h3><p class="price">৳ 3,200</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card hidden" data-index="14"><img src="image/new14.jpg" alt="New Arrival 14" /><h3>Printed T-Shirt</h3><p class="price">৳ 600</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card hidden" data-index="15"><img src="image/new15.jpg" alt="New Arrival 15" /><h3>Jeans</h3><p class="price">৳ 1,400</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card hidden" data-index="16"><img src="image/new16.jpg" alt="New Arrival 16" /><h3>Summer Dress</h3><p class="price">৳ 1,700</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card hidden" data-index="17"><img src="image/new17.jpg" alt="New Arrival 17" /><h3>Layered Tunic</h3><p class="price">৳ 1,350</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card hidden" data-index="18"><img src="image/new18.jpg" alt="New Arrival 18" /><h3>Classic Saree</h3><p class="price">৳ 2,400</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card hidden" data-index="19"><img src="image/new19.jpg" alt="New Arrival 19" /><h3>Printed Hoodie</h3><p class="price">৳ 1,200</p><button class="add-to-cart">Add to Cart</button></div>
+    <div class="product-card hidden" data-index="20"><img src="image/new20.jpg" alt="New Arrival 20" /><h3>Cotton Blouse</h3><p class="price">৳ 950</p><button class="add-to-cart">Add to Cart</button></div>
+  </div>
+
+  <!-- See More Button -->
+  <div class="see-more-container">
+  <button id="see-more-btn">See More</button>
+  <button id="see-less-btn" style="display: none;">See Less</button>
+</div>
+
+ 
+</section>
+   
+  <!-- Customer Reviews -->
+   
+<section class="carousel-section">
+    <h2>Customer Reviews</h2>
+    <div class="carousel-container">
+      <button class="arrow-btn left" id="prevBtn">‹</button>
+      <div class="carousel" id="carousel">
+        <div class="card"><img src="https://i.pravatar.cc/100?img=12"><h3>Jone</h3><p>"Fast delivery!"</p><div class="stars">★★★★★</div></div>
+        <div class="card"><img src="https://i.pravatar.cc/100?img=22"><h3>Rayan</h3><p>"Great support."</p><div class="stars">★★★★☆</div></div>
+        <div class="card"><img src="https://i.pravatar.cc/100?img=36"><h3>Alexa</h3><p>"Loved the design."</p><div class="stars">★★★★★</div></div>
+        <div class="card"><img src="https://i.pravatar.cc/100?img=45"><h3>Emily</h3><p>"Very responsive."</p><div class="stars">★★★★☆</div></div>
+        <div class="card"><img src="https://i.pravatar.cc/100?img=52"><h3>Tarox</h3><p>"Smooth experience."</p><div class="stars">★★★☆☆</div></div>
+        <div class="card"><img src="https://i.pravatar.cc/100?img=61"><h3>Fahim</h3><p>"Quick and easy."</p><div class="stars">★★★★☆</div></div>
+        <div class="card"><img src="https://i.pravatar.cc/100?img=67"><h3>Mayan</h3><p>"Highly recommend."</p><div class="stars">★★★★★</div></div>
+      </div>
+      <button class="arrow-btn right" id="nextBtn">›</button>
+    </div>
+  </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="contact-container">
+        <h2>Contact Us</h2>
+        <p>Have questions or need help? We'd love to hear from you!</p>
+        <form>
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea placeholder="Your Message" rows="5" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  
+ <!-- Footer -->
+<footer>
+  <div class="footer-container">
+
+    <!-- About -->
+    <div class="footer-section about">
+      <h2>ShopInfinity</h2>
+      <p>
+        Your one-stop shop for style, tech, and everyday essentials.<br>
+        We deliver joy, one product at a time.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-section links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-section contact">
+      <h3>Get in Touch</h3>
+      <p>📧 support@shopinfinity.com</p>
+      <p>📞 +880-1234-567890</p>
+      <p>📍 Chattogram, Bangladesh</p>
+    </div>
+
+  </div>
+
+  <!-- Copyright -->
+  <div class="footer-bottom">
+    <p class="copyright">
+      © 2025 ShopInfinity. All rights reserved.
+    </p>
+  </div>
+</footer>
+<style>
+/* Footer Styles */
+footer {
+  background: white;
+  font-family: Arial, sans-serif;
+}
+
+/* Footer Container */
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 40px 20px;
+}
+
+/* Footer Sections */
+.footer-section {
+  flex: 1 1 250px;
+  margin: 10px;
+}
+
+footer h2,
+footer h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+footer p {
+  color: #555;
+  line-height: 1.6;
+  margin: 5px 0;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+footer ul li {
+  margin-bottom: 5px;
+}
+
+footer ul li a {
+  color: #555;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+footer ul li a:hover {
+  color: #000;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  background-color: #fff3e0; /* Cream background */
+  text-align: center;
+  padding: 10px 0;
+}
+
+footer .copyright {
+  font-size: 12px; /* Smaller text */
+  color: #777;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-section {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+}
+</style>
+
+
+
+  <!-- JavaScript for Active Link Highlight -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll("nav ul li a");
+
+      window.addEventListener("scroll", () => {
+        let current = "";
+
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 120;
+          if (pageYOffset >= sectionTop) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === "#" + current) {
+            link.classList.add("active");
+          }
+        });
+      });
+    });
+  </script>
+
+
+
+<script>
+  function scrollLeft() {
+    console.log("Left button clicked");
+    document.getElementById("scrollContainer").scrollBy({ left: -200, behavior: "smooth" });
+  }
+
+  function scrollRight() {
+    document.getElementById("scrollContainer").scrollBy({ left: 200, behavior: "smooth" });
+  }
+</script>
+
+<script>
+  let visibleCount = 10;
+  const increment = 4;
+  const cards = document.querySelectorAll('.product-card');
+  const seeMoreBtn = document.getElementById('see-more-btn');
+  const seeLessBtn = document.getElementById('see-less-btn');
+
+  seeMoreBtn.addEventListener('click', () => {
+    let revealed = 0;
+    for (let i = visibleCount; i < cards.length && revealed < increment; i++) {
+      if (cards[i].classList.contains('hidden')) {
+        cards[i].classList.remove('hidden');
+        revealed++;
+      }
+    }
+    visibleCount += revealed;
+
+    if (visibleCount >= cards.length) {
+      seeMoreBtn.style.display = 'none';
+    }
+    if (visibleCount > 10) {
+      seeLessBtn.style.display = 'inline-block';
+    }
+  });
+
+  seeLessBtn.addEventListener('click', () => {
+    let hidden = 0;
+    for (let i = visibleCount - 1; i >= 10 && hidden < increment; i--) {
+      cards[i].classList.add('hidden');
+      hidden++;
+    }
+    visibleCount -= hidden;
+
+    if (visibleCount <= 10) {
+      seeLessBtn.style.display = 'none';
+    }
+    seeMoreBtn.style.display = 'inline-block';
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const user = localStorage.getItem("loggedInUser");
+    const loginContainer = document.querySelector(".login-btn-container");
+
+    if(user){
+      loginContainer.innerHTML = `
+        <span>Welcome, ${user}</span>
+        <button id="logoutBtn" style="margin-left:10px; padding:6px 12px; border:none; background:#b8860b; color:white; border-radius:5px; cursor:pointer;">Logout</button>
+      `;
+
+      document.getElementById("logoutBtn").addEventListener("click", function(){
+        localStorage.removeItem("loggedInUser");
+        window.location.reload();
+      });
+    }
+  });
+</script>
+
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const cards = document.querySelectorAll('.card');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      let positions = [0,1,2,3,4,5,6];
+
+      function updateCarousel() {
+        cards.forEach((card, i) => {
+          card.className = 'card pos' + positions[i];
+        });
+      }
+
+      prevBtn.addEventListener('click', () => {
+        positions.unshift(positions.pop());
+        updateCarousel();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        positions.push(positions.shift());
+        updateCarousel();
+      });
+
+      updateCarousel();
+    });
+  </script>
+
+
+<script>
+  const isLoggedIn = localStorage.getItem("loggedInUser");
+
+  document.querySelectorAll('.product-card a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      if (!isLoggedIn) {
+        e.preventDefault();
+        alert("Please log in to access this category.");
+        window.location.href = "login.html";
+      }
+    });
+  });
+</script>
+
+
+
+  
+</body>
+</html>

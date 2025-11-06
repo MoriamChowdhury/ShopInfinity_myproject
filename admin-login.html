@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <style>
+    body { font-family: sans-serif; background: #fdf6e3; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    .form-box { background: #e6d8c3; padding: 40px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); width: 100%; max-width: 400px; }
+    .form-box h2 { text-align: center; margin-bottom: 30px; }
+    .form-box input, .form-box button { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ccc; }
+    .form-box button { background: #b8860b; color: white; border: none; cursor: pointer; }
+    .form-box button:hover { background: #a0750a; }
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h2>Admin Login</h2>
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button id="loginBtn">Login</button>
+  </div>
+
+  <script>
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      const adminData = JSON.parse(localStorage.getItem("adminData"));
+
+      if(adminData && username === adminData.username && password === adminData.password){
+        localStorage.setItem("adminLoggedIn", "true");
+        window.location.href = "admin-panel.html";
+      } else {
+        alert("Invalid credentials!");
+      }
+    });
+  </script>
+</body>
+</html>

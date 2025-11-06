@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel | ShopInfinity</title>
+  <style>
+    body { margin: 0; font-family: sans-serif; display: flex; transition: background-color 0.3s, color 0.3s; }
+    body.light-mode { background-color: #f4f4f4; color: #333; }
+    body.dark-mode { background-color: #1e1e1e; color: #f4f4f4; }
+    .sidebar { width: 220px; background-color: #b8860b; color: white; padding: 20px; height: 100vh; }
+    .sidebar.dark-mode { background-color: #333; }
+    .sidebar h2 { margin-bottom: 30px; font-size: 22px; }
+    .sidebar ul { list-style: none; padding: 0; }
+    .sidebar ul li { margin-bottom: 10px; }
+    .sidebar ul li a, .drop-toggle { color: white; text-decoration: none; font-size: 16px; display: block; padding: 8px; border-radius: 5px; cursor: pointer; }
+    .sidebar ul li a:hover, .drop-toggle:hover { background-color: #a0750a; }
+    .dropdown-menu { display: none; list-style: none; padding-left: 15px; }
+    .dropdown-menu li a { font-size: 14px; color: white; text-decoration: none; padding: 5px; display: block; border-radius: 4px; }
+    .dropdown-menu li a:hover { background-color: #a0750a; }
+    .main { flex: 1; padding: 30px; transition: background-color 0.3s, color 0.3s; }
+    .main.dark-mode { background-color: #2a2a2a; }
+    .placeholder { background-color: #fff; padding: 40px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center; color: #777; font-size: 18px; transition: background-color 0.3s, color 0.3s; }
+    .placeholder.dark-mode { background-color: #444; color: #ddd; }
+    .mode-toggle { margin-bottom: 20px; padding: 8px 14px; background-color: #b8860b; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; }
+    .mode-toggle:hover { background-color: #a0750a; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    table th, table td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    table th { background-color: #b8860b; color: white; }
+    button.action-btn { padding: 4px 8px; background-color: #ff4d4d; color: white; border: none; border-radius: 4px; cursor: pointer; margin:2px; }
+    button.edit-btn { background-color: #4caf50; }
+    input.table-input { width: 90%; padding:4px; }
+  </style>
+</head>
+<body class="light-mode">
+
+  <div class="sidebar" id="sidebar">
+    <h2>Admin Panel</h2>
+    <ul>
+      <li><a href="#" id="dashboardLink">Dashboard</a></li>
+
+      <li class="dropdown">
+        <span class="drop-toggle">Products ▾</span>
+        <ul class="dropdown-menu">
+          <li><a href="#" id="viewProductsLink">View Products</a></li>
+        </ul>
+      </li>
+
+      <li class="dropdown">
+        <span class="drop-toggle">Users ▾</span>
+        <ul class="dropdown-menu">
+          <li><a href="#" id="viewUsersLink">View Users</a></li>
+        </ul>
+      </li>
+
+      <li class="dropdown">
+        <span class="drop-toggle">Orders ▾</span>
+        <ul class="dropdown-menu">
+          <li><a href="#" id="viewOrdersLink">View Orders</a></li>
+        </ul>
+      </li>
+
+      <li class="dropdown">
+        <span class="drop-toggle">Inventory ▾</span>
+        <ul class="dropdown-menu">
+          <li><a href="#" id="viewStockLink">View Stock</a></li>
+        </ul>
+      </li>
+
+      <li><a href="login.html" onclick="logoutUser()">Logout</a></li>
+    </ul>
+  </div>
+
+  <div class="main" id="main">
+    <button class="mode-toggle" id="modeToggle">🌙 Dark Mode</button>
+    <div id="contentArea" class="placeholder">
+      Welcome to ShopInfinity Admin Panel. Select a section from the sidebar to begin.
+    </div>
+  </div>
+
+<script>
+const toggles = document.querySelectorAll(".drop-toggle");
+toggles.forEach(t => t.addEventListener("click", function() {
+  const menu = this.nextElementSibling;
+  menu.style.display = menu.style.display==="block"?"none":"block";
+}));
+
+const modeToggle = document.getElementById("modeToggle");
+const body = document.body;
+const main = document.getElementById("main");
+const contentArea = document.getElementById("contentArea");
+
+modeToggle.addEventListener("click", ()=>{
+  body.classList.toggle("dark-mode"); body.classList.toggle("light-mode");
+  main.classList.toggle("dark-mode"); contentArea.classList.toggle("dark-mode");
+  modeToggle.textContent = body.classList.contains("dark-mode")?"☀️ Light Mode":"🌙 Dark Mode";
+});
+
+function logoutUser(){ localStorage.removeItem("loggedInUser"); }
+
+window.addEventListener("load", function(){
+  const adminLoggedIn = localStorage.getItem("adminLoggedIn");
+
+  if(adminLoggedIn === "true"){
+    // localStorage থেকে adminData পড়ে নাম নাও
+    const adminData = JSON.parse(localStorage.getItem("adminData"));
+    const adminName = adminData ? adminData.username : "Admin";
+
+    contentArea.innerHTML = `<h2>Welcome, ${adminName}</h2>`;
+  } else {
+    // কেউ admin login করেনি → redirect admin login page
+    window.location.href = "admin.html";
+  }
+});
+
+
+// -------------------- USERS --------------------
+function renderUsers(){
+  let users=[];
+  for(let key in localStorage){
+    if(key.startsWith("user_")){
+      const obj=JSON.parse(localStorage.getItem(key));
+      users.push({username:key.replace("user_",""), email: obj.email||"-"});
+    }
+  }
+  if(users.length===0){ contentArea.innerHTML="<p>No users found</p>"; return; }
+
+  let html=`<h2>Registered Users</h2><table><thead><tr><th>Username</th><th>Email</th><th>Action</th></tr></thead><tbody>`;
+  users.forEach(u=>{
+    html+=`<tr><td>${u.username}</td><td>${u.email}</td><td>
+      <button class="action-btn" onclick="deleteUser('${u.username}')">Delete</button>
+    </td></tr>`;
+  });
+  html+="</tbody></table>";
+  contentArea.innerHTML=html;
+}
+function deleteUser(username){ if(confirm(`Delete user "${username}"?`)){ localStorage.removeItem("user_"+username); renderUsers(); } }
+
+// -------------------- PRODUCTS --------------------
+function renderProducts(){
+  let products = JSON.parse(localStorage.getItem("products")||"[]");
+  let html=`<h2>Products</h2><button onclick="addProductPrompt()">Add Product</button>
+    <table><thead><tr><th>Name</th><th>Price</th><th>Action</th></tr></thead><tbody>`;
+  products.forEach((p,i)=>{
+    html+=`<tr>
+      <td>${p.name}</td>
+      <td>${p.price}</td>
+      <td>
+        <button class="action-btn edit-btn" onclick="editProduct(${i})">Edit</button>
+        <button class="action-btn" onclick="deleteProduct(${i})">Delete</button>
+      </td>
+    </tr>`;
+  });
+  html+="</tbody></table>"; contentArea.innerHTML=html;
+}
+
+function addProductPrompt(){
+  const name=prompt("Product Name:");
+  if(!name) return;
+  const price=prompt("Price:");
+  if(!price) return;
+  let products=JSON.parse(localStorage.getItem("products")||"[]");
+  products.push({name, price}); localStorage.setItem("products",JSON.stringify(products)); renderProducts();
+}
+function editProduct(index){
+  let products=JSON.parse(localStorage.getItem("products")||"[]");
+  const name=prompt("Edit Name:",products[index].name); if(!name) return;
+  const price=prompt("Edit Price:",products[index].price); if(!price) return;
+  products[index]={name, price}; localStorage.setItem("products",JSON.stringify(products)); renderProducts();
+}
+function deleteProduct(index){
+  if(confirm("Delete this product?")){ let products=JSON.parse(localStorage.getItem("products")||"[]"); products.splice(index,1); localStorage.setItem("products",JSON.stringify(products)); renderProducts(); }
+}
+
+// -------------------- ORDERS --------------------
+function renderOrders(){
+  let orders = JSON.parse(localStorage.getItem("orders")||"[]");
+  let html=`<h2>Orders</h2><button onclick="addOrderPrompt()">Add Order</button>
+    <table><thead><tr><th>Order ID</th><th>Product</th><th>Quantity</th><th>Action</th></tr></thead><tbody>`;
+  orders.forEach((o,i)=>{
+    html+=`<tr>
+      <td>${o.id}</td><td>${o.product}</td><td>${o.qty}</td>
+      <td>
+        <button class="action-btn edit-btn" onclick="editOrder(${i})">Edit</button>
+        <button class="action-btn" onclick="deleteOrder(${i})">Delete</button>
+      </td>
+    </tr>`;
+  });
+  html+="</tbody></table>"; contentArea.innerHTML=html;
+}
+
+function addOrderPrompt(){
+  const id=prompt("Order ID:"); if(!id) return;
+  const product=prompt("Product Name:"); if(!product) return;
+  const qty=prompt("Quantity:"); if(!qty) return;
+  let orders=JSON.parse(localStorage.getItem("orders")||"[]");
+  orders.push({id,product,qty}); localStorage.setItem("orders",JSON.stringify(orders)); renderOrders();
+}
+function editOrder(i){
+  let orders=JSON.parse(localStorage.getItem("orders")||"[]");
+  const id=prompt("Edit ID:",orders[i].id); if(!id) return;
+  const product=prompt("Edit Product:",orders[i].product); if(!product) return;
+  const qty=prompt("Edit Qty:",orders[i].qty); if(!qty) return;
+  orders[i]={id,product,qty}; localStorage.setItem("orders",JSON.stringify(orders)); renderOrders();
+}
+function deleteOrder(i){ if(confirm("Delete this order?")){ let orders=JSON.parse(localStorage.getItem("orders")||"[]"); orders.splice(i,1); localStorage.setItem("orders",JSON.stringify(orders)); renderOrders(); } }
+
+// -------------------- INVENTORY --------------------
+function renderInventory(){
+  let stock = JSON.parse(localStorage.getItem("inventory")||"[]");
+  let html=`<h2>Inventory</h2><button onclick="addStockPrompt()">Add Item</button>
+    <table><thead><tr><th>Item</th><th>Quantity</th><th>Action</th></tr></thead><tbody>`;
+  stock.forEach((s,i)=>{
+    html+=`<tr>
+      <td>${s.item}</td><td>${s.qty}</td>
+      <td>
+        <button class="action-btn edit-btn" onclick="editStock(${i})">Edit</button>
+        <button class="action-btn" onclick="deleteStock(${i})">Delete</button>
+      </td>
+    </tr>`;
+  });
+  html+="</tbody></table>"; contentArea.innerHTML=html;
+}
+
+function addStockPrompt(){
+  const item=prompt("Item Name:"); if(!item) return;
+  const qty=prompt("Quantity:"); if(!qty) return;
+  let stock=JSON.parse(localStorage.getItem("inventory")||"[]");
+  stock.push({item,qty}); localStorage.setItem("inventory",JSON.stringify(stock)); renderInventory();
+}
+function editStock(i){
+  let stock=JSON.parse(localStorage.getItem("inventory")||"[]");
+  const item=prompt("Edit Item:",stock[i].item); if(!item) return;
+  const qty=prompt("Edit Qty:",stock[i].qty); if(!qty) return;
+  stock[i]={item,qty}; localStorage.setItem("inventory",JSON.stringify(stock)); renderInventory();
+}
+function deleteStock(i){ if(confirm("Delete this item?")){ let stock=JSON.parse(localStorage.getItem("inventory")||"[]"); stock.splice(i,1); localStorage.setItem("inventory",JSON.stringify(stock)); renderInventory(); } }
+
+// -------------------- LINK EVENTS --------------------
+document.getElementById("viewUsersLink").addEventListener("click", e=>{ e.preventDefault(); renderUsers(); });
+document.getElementById("viewProductsLink").addEventListener("click", e=>{ e.preventDefault(); renderProducts(); });
+document.getElementById("viewOrdersLink").addEventListener("click", e=>{ e.preventDefault(); renderOrders(); });
+document.getElementById("viewStockLink").addEventListener("click", e=>{ e.preventDefault(); renderInventory(); });
+</script>
+</body>
+</html>
